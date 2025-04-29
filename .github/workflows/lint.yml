@@ -3,13 +3,15 @@ name: Lint
 on: [push]
 
 jobs:
+jobs:
   tflint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: TFLint
-        uses: docker://wata727/tflint
+        uses: docker://ghcr.io/terraform-linters/tflint:v0.55.1
+
 
   fmt:
     name: Code Format
@@ -17,8 +19,18 @@ jobs:
     container:
       image: hashicorp/terraform:1.10.0
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - run: terraform fmt --recursive -check=true
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:1.10.0
+    steps:
+      - uses: actions/checkout@master
+      - run: terraform init
+      - run: terraform test
 
   validate:
     name: Validate
@@ -26,7 +38,7 @@ jobs:
     container:
       image: hashicorp/terraform:1.10.0
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Validate Code
         env:
           AWS_REGION: 'us-east-1'
@@ -53,7 +65,7 @@ jobs:
     container:
       image: hashicorp/terraform:1.10.0
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Validate Code
         env:
           AWS_REGION: 'us-east-1'
