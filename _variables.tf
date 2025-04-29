@@ -157,12 +157,6 @@ variable "service_deployment_maximum_percent" {
   description = "Maximum percentage of tasks to run during deployments"
 }
 
-variable "service_desired_count" {
-  default     = 1
-  type        = number
-  description = "Desired count for this service (for use when auto scaling is disabled)"
-}
-
 variable "service_deployment_minimum_healthy_percent" {
   default     = 100
   type        = number
@@ -205,18 +199,6 @@ variable "alb_priority" {
   default     = 0
   type        = number
   description = "priority rules ALB (leave 0 to let terraform calculate)"
-}
-
-variable "autoscaling_min_prod" {
-  type        = string
-  default     = "1"
-  description = "Min number of containers to scale with autoscaling"
-}
-
-variable "autoscaling_max_prod" {
-  type        = string
-  default     = "1"
-  description = "Max number of containers to scale with autoscaling"
 }
 
 variable "alarm_min_healthy_tasks" {
@@ -313,11 +295,6 @@ variable "security_groups" {
   default     = null
   description = "The security groups associated with the task or service"
   type        = list(string)
-}
-
-variable "log_subscription_filter_enabled" {
-  type    = string
-  default = false
 }
 
 variable "log_subscription_filter_role_arn" {
@@ -456,19 +433,19 @@ variable "ulimits" {
   default     = null
 }
 
-variable "autoscaling_custom" {
-  type = list(object({
-    name               = string
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    metric_name        = string
-    namespace          = string
-    statistic          = string
-  }))
-  default     = []
-  description = "Set one or more app autoscaling by customized metric"
-}
+# variable "autoscaling_custom" {
+#   type = list(object({
+#     name               = string
+#     scale_in_cooldown  = number
+#     scale_out_cooldown = number
+#     target_value       = number
+#     metric_name        = string
+#     namespace          = string
+#     statistic          = string
+#   }))
+#   default     = []
+#   description = "Set one or more app autoscaling by customized metric"
+# }
 
 variable "dynamic_stickiness" {
   type        = any
@@ -500,11 +477,11 @@ variable "alarm_ecs_running_tasks_threshold" {
   description = "Alarm when the number of ecs service running tasks is lower than a certain value. CloudWatch Container Insights must be enabled for the cluster."
 }
 
-variable "enable_schedule" {
-  default     = false
-  type        = bool
-  description = "Enables schedule to shut down and start up instances outside business hours."
-}
+# variable "enable_schedule" {
+#   default     = false
+#   type        = bool
+#   description = "Enables schedule to shut down and start up instances outside business hours."
+# }
 
 variable "schedule_cron_start" {
   type        = string
@@ -513,42 +490,6 @@ variable "schedule_cron_start" {
 }
 
 variable "schedule_cron_stop" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
-}
-
-variable "enable_schedule_prod_1" {
-  type        = string
-  default     = false
-  description = "enable / disable schedule on prod"
-}
-
-variable "enable_schedule_prod_2" {
-  type        = string
-  default     = false
-  description = "enable / disable schedule on prod"
-}
-
-variable "schedule_cron_stop_prod_1" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
-}
-
-variable "schedule_cron_stop_prod_2" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
-}
-
-variable "schedule_cron_start_prod_1" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
-}
-
-variable "schedule_cron_start_prod_2" {
   type        = string
   default     = ""
   description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
