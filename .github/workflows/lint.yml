@@ -3,7 +3,6 @@ name: Lint
 on: [push]
 
 jobs:
-jobs:
   tflint:
     name: Lint
     runs-on: ubuntu-latest
