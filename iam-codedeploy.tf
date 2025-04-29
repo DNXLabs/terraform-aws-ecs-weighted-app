@@ -4,7 +4,7 @@ resource "aws_iam_role" "codedeploy_service" {
     if var.create_iam_codedeployrole
   }
 
-  name = "codedeploy-service-${var.cluster_name}-${each.key}-${local.regions_shortname[data.aws_region.current.name]}"
+  name = "codedeploy-service-${var.cluster_name}-${each.key}-${try(local.regions_shortname[data.aws_region.current.name], "apse2")}"
 
   assume_role_policy = <<EOF
 {
