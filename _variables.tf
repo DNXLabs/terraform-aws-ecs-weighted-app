@@ -483,14 +483,14 @@ variable "alarm_ecs_running_tasks_threshold" {
 #   description = "Enables schedule to shut down and start up instances outside business hours."
 # }
 
-variable "schedule_cron_start" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a start of the auto-scaling group. E.g. 'cron(00 21 ? * SUN-THU *)' to start at 8am UTC time."
-}
+# variable "schedule_cron_start" {
+#   type        = string
+#   default     = ""
+#   description = "Cron expression to define when to trigger a start of the auto-scaling group. E.g. 'cron(00 21 ? * SUN-THU *)' to start at 8am UTC time."
+# }
 
-variable "schedule_cron_stop" {
-  type        = string
-  default     = ""
-  description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
-}
+# variable "schedule_cron_stop" {
+#   type        = string
+#   default     = ""
+#   description = "Cron expression to define when to trigger a stop of the auto-scaling group. E.g. 'cron(00 09 ? * MON-FRI *)' to start at 8am UTC time"
+# }
